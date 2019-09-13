@@ -1,0 +1,187 @@
+mysql> source /Users/gracedurham/src/my_scripts/gdurham_assignment1.sql
+--------------
+
+/*  Assignment1.sql
+    Grace Durham
+    CS 150A, Spring 2019  */
+
+
+/* Query 0 */
+SELECT user(), current_date()
+--------------
+
++----------------+----------------+
+| user()         | current_date() |
++----------------+----------------+
+| root@localhost | 2019-08-23     |
++----------------+----------------+
+1 row in set (0.00 sec)
+
+--------------
+/* Query 1 */
+DROP DATABASE zoo
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+
+--------------
+CREATE DATABASE zoo
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+
+Database changed
+--------------
+/* Query 2 */
+
+DROP TABLE IF EXISTS animal
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+--------------
+CREATE TABLE animal (
+ animal_id INTEGER NOT NULL,
+ animal_name VARCHAR(25) NULL,
+ animal_type VARCHAR(25) NOT NULL,
+ animal_cost DECIMAL(7 , 2 ) UNSIGNED NOT NULL,
+ animal_dob DATETIME NOT NULL,
+ animal_acquired DATE NOT NULL)
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+--------------
+/* Query 3 */
+
+INSERT INTO animal VALUES
+   (23, 'Sam', 'Giraffe', 5000.00, '2002-05-15 10:45:00', '2002-05-15')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO animal VALUES
+   (47, NULL, 'Horse', 490.00, '2010-05-15 08:30:00 ', '2010-04-15')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO animal VALUES
+   (56, 'Leon', 'Lion', 5000.00, '2009-02-25 15:00:00', '2010-03-25')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO animal VALUES
+   (57, 'Lenora', 'Lion', 5000.00, '2009-03-25 15:35:00', '2011-01-15')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO animal VALUES
+   (85, 'Sally', 'Giraffe', 5000.25, '2009-05-15 2:02:00', '2012-05-15')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO animal VALUES
+   (43, 'Huey', 'Zebra', 2500.25, '2012-06-02 02:02:00', '2012-06-02')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+/* Query 4 */
+
+SHOW TABLES
+--------------
+
++---------------+
+| Tables_in_zoo |
++---------------+
+| animal        |
++---------------+
+1 row in set (0.00 sec)
+
+--------------
+/* Query 5 */
+
+DESC animal
+--------------
+
++-----------------+-----------------------+------+-----+---------+-------+
+| Field           | Type                  | Null | Key | Default | Extra |
++-----------------+-----------------------+------+-----+---------+-------+
+| animal_id       | int(11)               | NO   |     | NULL    |       |
+| animal_name     | varchar(25)           | YES  |     | NULL    |       |
+| animal_type     | varchar(25)           | NO   |     | NULL    |       |
+| animal_cost     | decimal(7,2) unsigned | NO   |     | NULL    |       |
+| animal_dob      | datetime              | NO   |     | NULL    |       |
+| animal_acquired | date                  | NO   |     | NULL    |       |
++-----------------+-----------------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+--------------
+/* Query 6 */
+
+SELECT *
+FROM animal
+--------------
+
++-----------+-------------+-------------+-------------+---------------------+-----------------+
+| animal_id | animal_name | animal_type | animal_cost | animal_dob          | animal_acquired |
++-----------+-------------+-------------+-------------+---------------------+-----------------+
+|        23 | Sam         | Giraffe     |     5000.00 | 2002-05-15 10:45:00 | 2002-05-15      |
+|        47 | NULL        | Horse       |      490.00 | 2010-05-15 08:30:00 | 2010-04-15      |
+|        56 | Leon        | Lion        |     5000.00 | 2009-02-25 15:00:00 | 2010-03-25      |
+|        57 | Lenora      | Lion        |     5000.00 | 2009-03-25 15:35:00 | 2011-01-15      |
+|        85 | Sally       | Giraffe     |     5000.25 | 2009-05-15 02:02:00 | 2012-05-15      |
+|        43 | Huey        | Zebra       |     2500.25 | 2012-06-02 02:02:00 | 2012-06-02      |
++-----------+-------------+-------------+-------------+---------------------+-----------------+
+6 rows in set (0.00 sec)
+
+--------------
+/* Query 7 */
+
+SELECT animal_name, animal_type
+FROM animal
+--------------
+
++-------------+-------------+
+| animal_name | animal_type |
++-------------+-------------+
+| Sam         | Giraffe     |
+| NULL        | Horse       |
+| Leon        | Lion        |
+| Lenora      | Lion        |
+| Sally       | Giraffe     |
+| Huey        | Zebra       |
++-------------+-------------+
+6 rows in set (0.00 sec)
+
+--------------
+/* Query 8 */
+
+
+SELECT animal_name, animal_id, animal_cost, animal_dob, animal_acquired
+FROM animal
+--------------
+
++-------------+-----------+-------------+---------------------+-----------------+
+| animal_name | animal_id | animal_cost | animal_dob          | animal_acquired |
++-------------+-----------+-------------+---------------------+-----------------+
+| Sam         |        23 |     5000.00 | 2002-05-15 10:45:00 | 2002-05-15      |
+| NULL        |        47 |      490.00 | 2010-05-15 08:30:00 | 2010-04-15      |
+| Leon        |        56 |     5000.00 | 2009-02-25 15:00:00 | 2010-03-25      |
+| Lenora      |        57 |     5000.00 | 2009-03-25 15:35:00 | 2011-01-15      |
+| Sally       |        85 |     5000.25 | 2009-05-15 02:02:00 | 2012-05-15      |
+| Huey        |        43 |     2500.25 | 2012-06-02 02:02:00 | 2012-06-02      |
++-------------+-----------+-------------+---------------------+-----------------+
+6 rows in set (0.00 sec)
+
+mysql> notee
